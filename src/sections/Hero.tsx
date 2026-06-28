@@ -1,16 +1,55 @@
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
 import { eventData } from "../data/eventData";
 import bgImage from "../assets/qyzuzatu1.jpg";
 
 export default function Hero() {
+
+  const ref = useRef(null);
+
+    const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+    });
+
+    // Параллакс
+    const y = useTransform(scrollYProgress, [0, 1], [0, 420]);
+
+    // Глубина
+    const scale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1.15, 1]
+    );  
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section
+    ref={ref}
+    className="relative overflow-hidden bg-white"
+    >
       {/* Верхнее фото */}
       <div className="relative h-[60vh] w-full overflow-hidden">
-        <img
-          src={bgImage}
-          alt=""
-          className="h-full w-full object-cover"
+        <div className="absolute inset-0 bg-black/10" />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-white/20" />
+        <motion.img
+        src={bgImage}
+        alt=""
+        style={{
+            y,
+            scale,
+        }}
+        className="
+            absolute
+            inset-0
+            h-full
+            w-full
+            object-cover
+            object-center
+        "
         />
 
         {/* затемнение */}

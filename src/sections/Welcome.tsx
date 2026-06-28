@@ -1,7 +1,6 @@
 import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 import { eventData } from "../data/eventData";
-import womanImg from "../assets/woman_qyzuzatu3.png";
 import oyuImg from "../assets/oyu_circle.png";
 import { motion } from "framer-motion";
 
@@ -11,11 +10,6 @@ export default function Welcome() {
     <AnimatedSection>
       <section className="section-padding flex flex-col items-center justify-center gap-5 relative overflow-hidden">
         {/* absolute image */}
-        <img
-          src={womanImg}
-          alt="decoration"
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[50px] w-64 md:w-80 lg:w-96 opacity-90 pointer-events-none select-none"
-        />
         <motion.img
         src={oyuImg}
         alt="decoration"
