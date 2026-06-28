@@ -139,11 +139,7 @@ export default function SplashScreen({
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.55, duration: 0.7 }}
-                  className="mb-5 text-[11px] uppercase tracking-[6px] text-[#a9802f]"
-                  style={{
-                    fontFamily:
-                      "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
-                  }}
+                  className="font-cormorant mb-5 text-[11px] uppercase tracking-[6px] text-[#a9802f]"
                 >
                   Шақыру
                 </motion.p>
@@ -152,11 +148,7 @@ export default function SplashScreen({
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.75, duration: 0.85, ease: "easeOut" }}
-                  className="text-[2.6rem] font-semibold leading-[1.05] text-[#2a1d14]"
-                  style={{
-                    fontFamily:
-                      "'Playfair Display', Georgia, 'Times New Roman', serif",
-                  }}
+                  className="font-kz-1 text-[2.6rem] font-semibold leading-[1.05] text-[#2a1d14]"
                 >
                   Қыз
                 </motion.h1>
@@ -164,11 +156,7 @@ export default function SplashScreen({
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.95, duration: 0.85, ease: "easeOut" }}
-                  className="text-[2.6rem] font-semibold leading-[1.05] text-[#2a1d14]"
-                  style={{
-                    fontFamily:
-                      "'Playfair Display', Georgia, 'Times New Roman', serif",
-                  }}
+                  className="font-kz-1 text-[2.6rem] font-semibold leading-[1.05] text-[#2a1d14]"
                 >
                   Ұзату
                 </motion.h1>
@@ -184,11 +172,7 @@ export default function SplashScreen({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.6, duration: 0.7 }}
-                  className="text-[13px] leading-relaxed text-[#7a6a52]"
-                  style={{
-                    fontFamily:
-                      "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
-                  }}
+                  className="font-cormorant text-[13px] leading-relaxed text-[#7a6a52]"
                 >
                   Ашу үшін мөрді басыңыз
                 </motion.p>
@@ -327,7 +311,7 @@ function WaxSeal({ cracked }: { cracked: boolean }) {
           fill="#e7c98f"
           opacity="0.9"
         >
-          Қ
+          
         </text>
         <ellipse
           cx="38"
