@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import bride from "../assets/secondKorkemay.jpg";
+import bride from "../assets/secondKorkemay.webp";
 
 export default function BridePhoto() {
   const ref = useRef(null);

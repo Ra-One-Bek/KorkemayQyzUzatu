@@ -3,25 +3,25 @@ import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 
-import image1 from "../assets/gallery_1.jpg";
-import image2 from "../assets/gallery_2.jpg";
-import image3 from "../assets/gallery_3.jpg";
-import image4 from "../assets/gallery_4.jpg";
-import image5 from "../assets/gallery_5.jpg";
-import image6 from "../assets/gallery_6.jpg";
-import image7 from "../assets/gallery_7.jpg";
-import image8 from "../assets/gallery_8.jpg";
-import image9 from "../assets/gallery_9.jpg";
-import image10 from "../assets/gallery_10.jpg";
-import image11 from "../assets/gallery_11.jpg";
-import image12 from "../assets/gallery_12.jpg";
-import image13 from "../assets/gallery_13.jpg";
-import image14 from "../assets/gallery_14.jpg";
-import image15 from "../assets/gallery_15.jpg";
-import image16 from "../assets/gallery_16.jpg";
-import image17 from "../assets/gallery_17.jpg";
-import image18 from "../assets/gallery_18.jpg";
-import image19 from "../assets/gallery_19.jpg";
+import image1 from "../assets/gallery_1.webp";
+import image2 from "../assets/gallery_2.webp";
+import image3 from "../assets/gallery_3.webp";
+import image4 from "../assets/gallery_4.webp";
+import image5 from "../assets/gallery_5.webp";
+import image6 from "../assets/gallery_6.webp";
+import image7 from "../assets/gallery_7.webp";
+import image8 from "../assets/gallery_8.webp";
+import image9 from "../assets/gallery_9.webp";
+import image10 from "../assets/gallery_10.webp";
+import image11 from "../assets/gallery_11.webp";
+import image12 from "../assets/gallery_12.webp";
+import image13 from "../assets/gallery_13.webp";
+import image14 from "../assets/gallery_14.webp";
+import image15 from "../assets/gallery_15.webp";
+import image16 from "../assets/gallery_16.webp";
+import image17 from "../assets/gallery_17.webp";
+import image18 from "../assets/gallery_18.webp";
+import image19 from "../assets/gallery_19.webp";
 
 
 

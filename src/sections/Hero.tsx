@@ -5,7 +5,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import { eventData } from "../data/eventData";
-import bgImage from "../assets/HeroKorkemay.jpg";
+import bgImage from "../assets/HeroKorkemay.webp";
 
 export default function Hero() {
 
