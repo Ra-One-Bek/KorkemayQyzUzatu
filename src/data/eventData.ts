@@ -9,7 +9,7 @@ export const eventData = {
 
   venue: {
     name: "Үміт",
-    address: "Тараз, Улица Каратая Турысова, 21",
+    address: "Қаратай Тұрысов көшесі, 21",
     map: "https://2gis.kz/taraz/geo/70000001051838235",
   },
 

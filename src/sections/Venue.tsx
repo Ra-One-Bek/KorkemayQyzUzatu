@@ -63,7 +63,7 @@ export default function Venue() {
               className="mx-auto text-[#d4af37]"
             />
 
-            <h3 className="font-cormorant mt-5 text-3xl text-[#1f1f1f]">
+            <h3 className="font-cormorant italic mt-5 text-3xl text-[#1f1f1f]">
               {eventData.venue.name}
             </h3>
 

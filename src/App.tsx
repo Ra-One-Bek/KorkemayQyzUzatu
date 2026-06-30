@@ -11,7 +11,6 @@ import Story from "./sections/Story";
 import Timeline from "./sections/Timeline";
 import Venue from "./sections/Venue";
 import CountdownSection from "./sections/CountdownSection";
-import DressCode from "./sections/DressCode";
 import Gallery from "./sections/Gallery";
 import Wishes from "./sections/Wishes";
 import RSVP from "./sections/RSVP";
@@ -70,10 +69,6 @@ function App() {
 
         <Venue />
 
-        <CountdownSection />
-
-        <DressCode />
-
         <Gallery />
 
         <DecorativeDivider />
@@ -81,6 +76,8 @@ function App() {
         <Wishes />
 
         <DecorativeDivider />
+
+        <CountdownSection />
 
         <RSVP />
 

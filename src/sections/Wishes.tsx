@@ -130,13 +130,13 @@ export default function Wishes() {
                 </svg>
               </motion.div>
 
-              {/* Восковая печать — бабочки сидели "на ней" */}
+              {/* Восковая печать */}
               <AnimatePresence>
                 {!open && (
                   <motion.div
                     exit={{ scale: 0, opacity: 0, rotate: 90 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute left-1/2 top-[92px] -translate-x-1/2 -translate-y-1/2 z-20
+                    className="absolute left-1/2 top-[110px] -translate-x-1/2 -translate-y-1/2 z-20
                                h-12 w-12 rounded-full flex items-center justify-center shadow-md"
                     style={{
                       background: "radial-gradient(circle at 35% 30%, #d4af37, #9c7a23)",
@@ -152,7 +152,7 @@ export default function Wishes() {
                 initial={false}
                 animate={open ? { y: -40, opacity: 1 } : { y: 40, opacity: 0 }}
                 transition={{ duration: 0.8, delay: open ? 0.5 : 0, ease: "easeOut" }}
-                className="absolute inset-x-4 sm:inset-x-8 top-6 bottom-6 z-10
+                className="absolute inset-x-4 sm:inset-x-8 top-6 bottom-14 z-10
                            glass rounded-xl flex items-center justify-center p-6 sm:p-10"
               >
                 <p className="font-cormorant italic text-center text-lg sm:text-xl leading-8 text-neutral-700">

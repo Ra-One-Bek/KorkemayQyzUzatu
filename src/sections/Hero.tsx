@@ -34,7 +34,7 @@ export default function Hero() {
     className="relative overflow-hidden bg-white"
     >
       {/* Верхнее фото */}
-      <div className="relative h-[60vh] w-full overflow-hidden">
+      <div className="relative h-[75vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/10" />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-white/20" />
@@ -209,9 +209,9 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="
             mx-auto flex items-center justify-center gap-3
-            font-kz-2
+            font-kz-1
             italic
-            text-[26px]
+            text-[45px]
             text-amber-900
           "
         >
@@ -238,7 +238,7 @@ export default function Hero() {
           className="
             font-kz-1
             mt-3
-            text-6xl
+            text-7xl
             leading-[1.05]
             text-[#b8922e]
             drop-shadow-md
@@ -254,50 +254,6 @@ export default function Hero() {
           transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
           className="mx-auto my-4 h-px w-24 origin-center bg-[#d4af37]"
         />
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="
-            font-cormorant
-            text-xl
-            italic
-            tracking-[-0.5px]
-            text-neutral-700
-          "
-        >
-          Салтанатты кеш
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.7 }}
-          className="mt-3 flex flex-col items-center gap-1"
-        >
-          <p className="font-cormorant italic text-3xl text-amber-900">
-            {eventData.date}
-          </p>
-          <p className="font-cormorant italic text-xl text-neutral-500">
-            {eventData.time}
-          </p>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
-          className="mt-4"
-        >
-          <div className="mx-auto h-7 w-px bg-[#d4af37]/50" />
-
-          <p className="mt-1 text-xs uppercase tracking-[5px] text-neutral-400">
-            scroll
-          </p>
-        </motion.div>
       </div>
     </section>
   );

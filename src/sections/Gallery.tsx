@@ -28,8 +28,7 @@ import image19 from "../assets/gallery_19.webp";
 const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19];
 
 // Дублируем ряд, чтобы лента всегда оставалась заполненной при любой ширине экрана
-const topRow = [...images, ...images, ...images];
-const bottomRow = [...images.slice().reverse(), ...images.slice().reverse(), ...images.slice().reverse()];
+const row = [...images, ...images];
 
 export default function Gallery() {
   return (
@@ -43,19 +42,10 @@ export default function Gallery() {
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#f8f8f8] to-transparent sm:w-24" />
 
           <MarqueeRow
-            items={topRow}
+            items={row}
             direction="right"
             depth="near"
-            speed={32}
-          />
-
-          <div className="h-4 sm:h-6" />
-
-          <MarqueeRow
-            items={bottomRow}
-            direction="left"
-            depth="far"
-            speed={26}
+            speed={28}
           />
         </div>
       </section>
@@ -76,9 +66,21 @@ function MarqueeRow({ items, direction, depth, speed }: MarqueeRowProps) {
   const [trackWidth, setTrackWidth] = useState(0);
   const [paused, setPaused] = useState(false);
   const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = trackRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.01 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const sign = direction === "right" ? 1 : -1;
-  const half = trackWidth / 3 || 1; // длина одной копии набора (у нас 3 копии)
+  const half = trackWidth / 2 || 1; // длина одной копии набора (у нас 2 копии)
 
   useEffect(() => {
     const node = trackRef.current;
@@ -93,7 +95,7 @@ function MarqueeRow({ items, direction, depth, speed }: MarqueeRowProps) {
   }, []);
 
   useAnimationFrame((_, delta) => {
-    if (paused) return;
+    if (paused || !inView) return;
     const next = x.get() + sign * speed * (delta / 1000);
     x.set(wrap(next, half));
   });
@@ -127,7 +129,7 @@ function MarqueeRow({ items, direction, depth, speed }: MarqueeRowProps) {
       onDragEnd={() => {
         pauseThenResume();
       }}
-      style={{ x }}
+      style={{ x, willChange: "transform", translateZ: 0 }}
       className="flex w-max cursor-grab select-none active:cursor-grabbing"
     >
       {items.map((src, i) => (
@@ -160,10 +162,10 @@ function MarqueeCard({
       }}
       whileTap={{ scale: 0.97 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative mx-2 shrink-0 overflow-hidden rounded-[28px] sm:mx-3 ${
+      className={`relative mx-3 shrink-0 overflow-hidden rounded-[32px] sm:mx-4 will-change-transform ${
         isNear
-          ? "h-44 w-60 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.22)] sm:h-56 sm:w-72"
-          : "h-36 w-48 opacity-80 shadow-[0_14px_30px_-10px_rgba(0,0,0,0.16)] sm:h-44 sm:w-60"
+          ? "h-64 w-80 shadow-[0_18px_32px_-14px_rgba(0,0,0,0.20)] sm:h-80 sm:w-[26rem]"
+          : "h-56 w-72 opacity-80 shadow-[0_12px_22px_-12px_rgba(0,0,0,0.15)] sm:h-72 sm:w-96"
       }`}
       style={!isNear ? { filter: "saturate(0.92) brightness(0.96)" } : undefined}
     >
@@ -171,6 +173,8 @@ function MarqueeCard({
         src={src}
         alt="Естелік сурет"
         draggable={false}
+        loading="lazy"
+        decoding="async"
         className="h-full w-full object-cover object-[center_30%]"
       />
       <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-black/5" />
