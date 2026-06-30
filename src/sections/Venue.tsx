@@ -67,6 +67,10 @@ export default function Venue() {
               {eventData.venue.name}
             </h3>
 
+            <p className="font-cormorant leading-7 text-neutral-900">
+              Банкет залы
+            </p>
+
             <p className="font-cormorant mt-4 leading-7 text-neutral-600">
               {eventData.venue.address}
             </p>

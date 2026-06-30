@@ -3,14 +3,14 @@ export const eventData = {
 
   bride: "Көркемай",
 
-  date: "1 Тамыз 2026",
+  date: "1 тамыз 2026",
 
   time: "18:00",
 
   venue: {
-    name: "Grand Palace",
-    address: "Астана, Қабанбай батыр 12",
-    map: "https://maps.google.com",
+    name: "Үміт",
+    address: "Тараз, Улица Каратая Турысова, 21",
+    map: "https://2gis.kz/taraz/geo/70000001051838235",
   },
 
   countdownDate: "2026-08-01T18:00:00+05:00",

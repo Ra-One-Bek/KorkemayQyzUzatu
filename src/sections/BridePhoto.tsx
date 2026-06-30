@@ -61,7 +61,7 @@ export default function BridePhoto() {
 
       {/* Рваный низ */}
       <svg
-        className="absolute bottom-0 left-0 z-20 w-full"
+        className="absolute -bottom-2 left-0 z-20 w-full"
         viewBox="0 0 1440 120"
         preserveAspectRatio="none"
         >
