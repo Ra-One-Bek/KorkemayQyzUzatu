@@ -55,7 +55,7 @@ export default function Venue() {
           <div className="glass max-w-xl rounded-[32px] p-4 text-center backdrop-blur-xl">
             <SectionTitle
               subtitle="Venue"
-              title="Өтетін орны"
+              title="Өтетін жер"
             />
 
             <FiMapPin

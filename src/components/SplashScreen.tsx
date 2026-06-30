@@ -10,7 +10,7 @@ export default function SplashScreen({
   visible,
   onOpen,
 }: SplashScreenProps) {
-  const [stage, setStage] = useState<"idle" | "breaking" | "opening">(
+  const [stage, setStage] = useState<"idle" | "breaking" | "opening" | "flash">(
     "idle"
   );
   const prefersReducedMotion = useReducedMotion();
@@ -19,52 +19,43 @@ export default function SplashScreen({
     if (stage !== "idle") return;
     setStage("breaking");
 
-    window.setTimeout(() => {
-      setStage("opening");
-    }, 550);
+    if (prefersReducedMotion) {
+      window.setTimeout(() => setStage("opening"), 200);
+      window.setTimeout(() => setStage("flash"), 500);
+      window.setTimeout(() => onOpen(), 800);
+      return;
+    }
 
-    window.setTimeout(
-      () => {
-        onOpen();
-      },
-      prefersReducedMotion ? 400 : 1900
-    );
+    // Печать ломается
+    window.setTimeout(() => setStage("opening"), 650);
+    // Конверт раскрывается (медленно, объёмно), вспышка вступает раньше — пока створки ещё в движении
+    window.setTimeout(() => setStage("flash"), 950);
+    // Белая вспышка укрывает сцену, затем открывается страница
+    window.setTimeout(() => onOpen(), 1850);
   };
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-[#f6f1e6]"
+          className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-white"
           exit={{
             opacity: 0,
-            transition: { duration: 0.9, delay: 0.15, ease: "easeInOut" },
+            transition: { duration: 0.9, ease: "easeInOut" },
           }}
         >
-          {/* Фоновая текстура — тонкая бумажная зернистость + виньетка */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, #2a1d14 1px, transparent 0)",
-              backgroundSize: "3px 3px",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 45%, transparent 0%, transparent 45%, rgba(42,29,20,0.06) 100%)",
-            }}
-          />
-
           {/* Орнаментальные уголки рамки сцены */}
-          <Corner className="left-6 top-6" />
-          <Corner className="right-6 top-6 -scale-x-100" />
-          <Corner className="bottom-6 left-6 -scale-y-100" />
-          <Corner className="bottom-6 right-6 -scale-x-100 -scale-y-100" />
+          <motion.div
+            animate={{ opacity: stage === "idle" ? 1 : 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Corner className="left-6 top-6" />
+            <Corner className="right-6 top-6 -scale-x-100" />
+            <Corner className="bottom-6 left-6 -scale-y-100" />
+            <Corner className="bottom-6 right-6 -scale-x-100 -scale-y-100" />
+          </motion.div>
 
-          <div className="relative" style={{ perspective: "2200px" }}>
+          <div className="relative" style={{ perspective: "3200px" }}>
             {/* Тень открытки на полу сцены */}
             <motion.div
               className="absolute left-1/2 top-full h-8 w-64 -translate-x-1/2 rounded-full bg-[#2a1d14]/15 blur-2xl"
@@ -86,16 +77,21 @@ export default function SplashScreen({
               animate={{
                 y: 0,
                 opacity: 1,
-                scale: 1,
-                rotate: stage === "opening" ? -1.5 : 0,
+                scale: stage === "flash" ? 1.04 : 1,
+                rotateX: stage === "opening" || stage === "flash" ? 6 : 0,
+                rotate:
+                  stage === "opening" || stage === "flash" ? -1.5 : 0,
               }}
               transition={{
                 duration: 1.1,
                 ease: [0.22, 1, 0.36, 1],
-                rotate: { duration: 1.4, ease: "easeInOut" },
+                rotate: { duration: 2, ease: "easeInOut" },
+                rotateX: { duration: 2, ease: "easeInOut" },
+                scale: { duration: 1.4, ease: "easeInOut" },
               }}
               className="relative h-[440px] w-[320px] rounded-[6px]"
               style={{
+                transformStyle: "preserve-3d",
                 background:
                   "linear-gradient(155deg, #fffdf7 0%, #fbf5e7 55%, #f6ecd6 100%)",
                 boxShadow:
@@ -191,10 +187,12 @@ export default function SplashScreen({
                 }}
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: stage === "opening" ? [0, 1, 0.6] : 0,
-                  scaleX: stage === "opening" ? [1, 14, 22] : 1,
+                  opacity:
+                    stage === "opening" ? [0, 1, 0.7] : stage === "flash" ? 1 : 0,
+                  scaleX:
+                    stage === "opening" ? [1, 16, 26] : stage === "flash" ? 30 : 1,
                 }}
-                transition={{ duration: 1.3, ease: "easeIn" }}
+                transition={{ duration: stage === "opening" ? 1.9 : 0.6, ease: "easeIn" }}
               />
 
               {/* ===== Восковая печать ===== */}
@@ -208,21 +206,34 @@ export default function SplashScreen({
                 whileTap={stage === "idle" ? { scale: 0.92 } : undefined}
                 animate={
                   stage === "breaking"
-                    ? { scale: [1, 1.12, 0], rotate: [0, -6, 14] }
+                    ? { scale: [1, 1.12, 0], opacity: [1, 1, 0], rotate: [0, -6, 14] }
                     : stage === "idle"
-                    ? { y: [0, -3, 0] }
-                    : {}
+                    ? { scale: 1, opacity: 1, y: [0, -3, 0] }
+                    : { scale: 0, opacity: 0 }
                 }
                 transition={
                   stage === "breaking"
                     ? { duration: 0.5, ease: "easeIn" }
-                    : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }
+                    : stage === "idle"
+                    ? { duration: 2.6, repeat: Infinity, ease: "easeInOut" }
+                    : { duration: 0.01 }
                 }
               >
                 <WaxSeal cracked={stage !== "idle"} />
               </motion.button>
             </motion.div>
           </div>
+
+          {/* ===== Белая вспышка, синхронизированная с раскрытием ===== */}
+          <motion.div
+            className="pointer-events-none absolute inset-0 z-[60] bg-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: stage === "flash" ? 1 : 0 }}
+            transition={{
+              duration: stage === "flash" ? 1.6 : 0.3,
+              ease: "easeInOut",
+            }}
+          />
         </motion.div>
       )}
     </AnimatePresence>
@@ -234,10 +245,10 @@ function EnvelopeFlap({
   stage,
 }: {
   side: "left" | "right";
-  stage: "idle" | "breaking" | "opening";
+  stage: "idle" | "breaking" | "opening" | "flash";
 }) {
   const isLeft = side === "left";
-  const open = stage === "opening";
+  const open = stage === "opening" || stage === "flash";
 
   return (
     <motion.div
@@ -248,9 +259,13 @@ function EnvelopeFlap({
         transformStyle: "preserve-3d",
       }}
       animate={{
-        rotateY: open ? (isLeft ? -100 : 100) : 0,
+        rotateY: open ? (isLeft ? -115 : 115) : 0,
       }}
-      transition={{ duration: 1.1, delay: 0.05, ease: [0.65, 0, 0.35, 1] }}
+      transition={{
+        duration: 1.9,
+        delay: isLeft ? 0.05 : 0.18,
+        ease: [0.65, 0, 0.35, 1],
+      }}
     >
       <div
         className="absolute inset-0"

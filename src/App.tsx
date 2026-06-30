@@ -15,7 +15,6 @@ import DressCode from "./sections/DressCode";
 import Gallery from "./sections/Gallery";
 import Wishes from "./sections/Wishes";
 import RSVP from "./sections/RSVP";
-import GuestTable from "./sections/GuestTable";
 import DecorativeDivider from "./sections/DecorativeDivider";
 import BridePhoto from "./sections/BridePhoto";
 
@@ -82,8 +81,6 @@ function App() {
         <Wishes />
 
         <DecorativeDivider />
-
-        <GuestTable />
 
         <RSVP />
 
