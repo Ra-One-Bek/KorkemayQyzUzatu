@@ -72,7 +72,7 @@ export default function RSVPForm() {
 
       <input
         type="text"
-        placeholder="Ваше имя"
+        placeholder="Аты жөніңіз"
         value={name}
         onChange={(e) =>
           setName(e.target.value)
@@ -82,7 +82,7 @@ export default function RSVPForm() {
 
       <input
         type="tel"
-        placeholder="Номер телефона"
+        placeholder="Нөмеріңіз"
         value={phone}
         onChange={(e) =>
           setPhone(e.target.value)
@@ -112,7 +112,7 @@ export default function RSVPForm() {
 
           <div className="text-left">
             <p className="font-medium">
-              Обязательно приду
+              Әрине келемін
             </p>
 
             <p className="text-sm text-neutral-500">
@@ -142,7 +142,7 @@ export default function RSVPForm() {
 
           <div className="text-left">
             <p className="font-medium">
-              Возможно приду
+              Нақты білмеймін
             </p>
 
             <p className="text-sm text-neutral-500">
@@ -172,7 +172,7 @@ export default function RSVPForm() {
 
           <div className="text-left">
             <p className="font-medium">
-              Не смогу прийти
+              Келе алмаймын
             </p>
 
             <p className="text-sm text-neutral-500">
@@ -188,8 +188,8 @@ export default function RSVPForm() {
         className="rounded-full bg-[#d4af37] py-5 text-sm uppercase tracking-[4px] text-white shadow-lg transition hover:scale-[1.02]"
       >
         {loading
-          ? "Отправка..."
-          : "Подтвердить"}
+          ? "Жіберілуде..."
+          : "Растау"}
       </button>
     </form>
   );
