@@ -6,7 +6,7 @@ import { eventData } from "../data/eventData";
 export default function Timeline() {
   return (
     <AnimatedSection>
-      <section className="section-padding">
+      <section className="relative overflow-hidden section-padding">
         <SectionTitle
           subtitle="Timeline"
           title="Бағдарлама"
@@ -40,7 +40,7 @@ export default function Timeline() {
               </p>
 
               <div className="glass rounded-3xl p-5">
-                <h3 className="font-cormorant text-xl text-[#1f1f1f]">
+                <h3 className="font-cormorant italic text-xl text-[#1f1f1f]">
                   {item.title}
                 </h3>
               </div>

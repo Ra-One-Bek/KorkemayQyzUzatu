@@ -12,7 +12,7 @@ export default function Wishes() {
         />
 
         <div className="glass rounded-sm p-10 text-center">
-          <p className="font-cormorant text-xl leading-9 text-neutral-700">
+          <p className="font-cormorant italic text-xl leading-9 text-neutral-700">
             {eventData.wishes}
           </p>
         </div>

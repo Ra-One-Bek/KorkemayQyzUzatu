@@ -5,7 +5,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import { eventData } from "../data/eventData";
-import bgImage from "../assets/qyzuzatu1.jpg";
+import bgImage from "../assets/HeroKorkemay.jpg";
 
 export default function Hero() {
 
@@ -53,10 +53,10 @@ export default function Hero() {
         />
 
         {/* затемнение */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/0 via-white/0 from-white/100" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/0 via-white/10 from-white/100" />
 
         {/* легкий blur */}
-        <div className="absolute inset-0 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 " />
 
         {/* название поверх фото */}
         <motion.p
@@ -133,6 +133,7 @@ export default function Hero() {
           className="
             font-cormorant
             text-2xl
+            italic
             tracking-[-1px]
             text-neutral-700
           "
@@ -140,11 +141,11 @@ export default function Hero() {
           Салтанатты кеш
         </motion.p>
 
-        <p className="font-cormorant mt-2 text-4xl text-neutral-800">
+        <p className="font-cormorant italic mt-2 text-4xl text-neutral-800">
           {eventData.date}
         </p>
 
-        <p className="font-cormorant text-3xl text-neutral-900">
+        <p className="font-cormorant italic text-3xl text-neutral-900">
           {eventData.time}
         </p>
 

@@ -29,7 +29,7 @@ export default function GuestTable() {
 
   return (
     <AnimatedSection>
-      <section className="section-padding">
+      <section className="relative section-padding overflow-hidden">
         <SectionTitle subtitle="Table" title="Кім болып келесіз?" />
 
 

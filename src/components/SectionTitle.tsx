@@ -17,7 +17,7 @@ export default function SectionTitle({
         </p>
       )}
 
-      <h2 className="font-cormorant text-5xl font-light text-[#1f1f1f]">
+      <h2 className="font-cormorant italic text-5xl font-light text-stone-800">
         {title}
       </h2>
     </div>

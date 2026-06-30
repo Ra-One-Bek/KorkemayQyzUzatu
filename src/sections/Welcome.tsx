@@ -43,7 +43,7 @@ export default function Welcome() {
         />
 
         <div className="w-4/5 rounded-3xl p-8 text-center relative z-10">
-          <p className="font-cormorant text-md leading-8 text-neutral-700">
+          <p className="font-cormorant italic text-md leading-8 text-neutral-700">
             {eventData.welcome}
           </p>
         </div>

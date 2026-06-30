@@ -12,7 +12,7 @@ export default function DressCode() {
           title="Ұсынылатын түстер"
         />
 
-        <p className="font-cormorant mb-10 text-center text-neutral-700">
+        <p className="font-cormorant italic mb-10 text-center text-neutral-700">
           Мерекелік кештің атмосферасын бірге
           қалыптастыру үшін төмендегі түстерді
           таңдауға кеңес береміз.

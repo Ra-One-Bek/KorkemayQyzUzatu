@@ -33,7 +33,7 @@ export default function Story() {
               }}
               className="glass rounded-[30px] p-8"
             >
-              <p className="font-cormorant text-lg leading-8 text-neutral-700">
+              <p className="font-cormorant italic text-lg leading-8 text-neutral-700">
                 {text}
               </p>
             </motion.div>

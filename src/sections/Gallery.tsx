@@ -3,12 +3,29 @@ import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 
-import image1 from "../assets/gallery-1.png";
-import image2 from "../assets/gallery-2.jpg";
-import image3 from "../assets/gallery-3.jpg";
-import image4 from "../assets/gallery-4.jpg";
+import image1 from "../assets/gallery_1.jpg";
+import image2 from "../assets/gallery_2.jpg";
+import image3 from "../assets/gallery_3.jpg";
+import image4 from "../assets/gallery_4.jpg";
+import image5 from "../assets/gallery_5.jpg";
+import image6 from "../assets/gallery_6.jpg";
+import image7 from "../assets/gallery_7.jpg";
+import image8 from "../assets/gallery_8.jpg";
+import image9 from "../assets/gallery_9.jpg";
+import image10 from "../assets/gallery_10.jpg";
+import image11 from "../assets/gallery_11.jpg";
+import image12 from "../assets/gallery_12.jpg";
+import image13 from "../assets/gallery_13.jpg";
+import image14 from "../assets/gallery_14.jpg";
+import image15 from "../assets/gallery_15.jpg";
+import image16 from "../assets/gallery_16.jpg";
+import image17 from "../assets/gallery_17.jpg";
+import image18 from "../assets/gallery_18.jpg";
+import image19 from "../assets/gallery_19.jpg";
 
-const images = [image1, image2, image3, image4];
+
+
+const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19];
 
 // Дублируем ряд, чтобы лента всегда оставалась заполненной при любой ширине экрана
 const topRow = [...images, ...images, ...images];
@@ -17,7 +34,7 @@ const bottomRow = [...images.slice().reverse(), ...images.slice().reverse(), ...
 export default function Gallery() {
   return (
     <AnimatedSection>
-      <section className="section-padding overflow-hidden">
+      <section className="relative section-padding overflow-hidden">
         <SectionTitle subtitle="Gallery" title="Естелік сәттер" />
 
         <div className="relative -mx-6 sm:-mx-10">

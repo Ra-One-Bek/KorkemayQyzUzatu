@@ -3,7 +3,7 @@ import ornament from "../assets/oyu.png";
 
 export default function DecorativeDivider() {
   return (
-    <section className="overflow-hidden py-10">
+    <section className="relative overflow-hidden py-10">
       <div className="relative">
         
         {/* бесконечная лента */}

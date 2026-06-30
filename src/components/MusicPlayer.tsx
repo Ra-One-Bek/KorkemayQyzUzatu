@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FiPause, FiPlay } from "react-icons/fi";
 
-import song from "../assets/music/song.mp3";
+import song from "../assets/music/kerbez-sulu.mp3";
 
 export default function MusicPlayer() {
   const audioRef =
