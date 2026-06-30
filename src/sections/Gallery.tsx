@@ -171,7 +171,7 @@ function MarqueeCard({
         src={src}
         alt="Естелік сурет"
         draggable={false}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover object-[center_30%]"
       />
       <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-black/5" />
     </motion.div>

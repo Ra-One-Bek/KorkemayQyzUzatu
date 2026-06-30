@@ -26,7 +26,7 @@ export default function BridePhoto() {
         src={bride}
         alt=""
         style={{ y, scale }}
-        className="absolute h-full w-full object-cover object-center"
+        className="absolute h-full w-full object-cover object-[center_30%]"
       />
 
       {/* Затемнение */}

@@ -59,22 +59,7 @@ export default function Hero() {
         <div className="absolute inset-0 " />
 
         {/* название поверх фото */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="
-            absolute left-1/2 top-10
-            w-full flex items-center justify-center
-            -translate-x-1/2
-            rounded-full
-            px-10 py-3
-            font-kz-3
-            text-4xl
-            text-[#b8922e]
-          "
-        >
-          {eventData.event}
-        </motion.p>
+        
 
         {/* рваный низ */}
         <svg
@@ -97,7 +82,23 @@ export default function Hero() {
       </div>
 
       {/* Нижний контент */}
-      <div className="relative z-10 mt-2 px-6 pb-20 text-center">
+      <div className="relative z-10 px-6 pb-20 text-center">
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="
+            w-full flex items-center justify-center
+            rounded-full
+            px-10 py-1
+            font-kz-2
+            italic
+            text-3xl
+            text-amber-900
+          "
+        >
+          {eventData.event}
+        </motion.p>
         <motion.h1
           initial={{
             opacity: 0,
@@ -132,7 +133,7 @@ export default function Hero() {
           transition={{ delay: 0.8 }}
           className="
             font-cormorant
-            text-2xl
+            text-xl
             italic
             tracking-[-1px]
             text-neutral-700
@@ -141,11 +142,11 @@ export default function Hero() {
           Салтанатты кеш
         </motion.p>
 
-        <p className="font-cormorant italic mt-2 text-4xl text-neutral-800">
+        <p className="font-cormorant italic mt-2 text-3xl text-amber-900">
           {eventData.date}
         </p>
 
-        <p className="font-cormorant italic text-3xl text-neutral-900">
+        <p className="font-cormorant italic text-2xl text-neutral-900">
           {eventData.time}
         </p>
 
@@ -155,9 +156,9 @@ export default function Hero() {
             duration: 2,
             repeat: Infinity,
           }}
-          className="mt-14"
+          className="mt-4"
         >
-          <div className="mx-auto h-10 w-px bg-[#d4af37]/50" />
+          <div className="mx-auto h-7 w-px bg-[#d4af37]/50" />
 
           <p className=" text-xs uppercase tracking-[5px] text-neutral-400">
             scroll

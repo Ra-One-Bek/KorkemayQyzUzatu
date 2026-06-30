@@ -11,7 +11,7 @@ export default function RSVP() {
 
         <SectionTitle
           subtitle="R S V P"
-          title="Қатысуыңызды растаңыз"
+          title="Келетініңізді растаңыз"
         />
 
         <motion.div
@@ -39,7 +39,7 @@ export default function RSVP() {
             </p>
 
             <h3 className="font-cormorant italic text-3xl text-[#1f1f1f]">
-              Қатысуыңызды растаңыз
+              Құрметпен жауабыңызды күтеміз
             </h3>
 
             <p className="font-cormorant italic mt-4 text-sm leading-7 text-neutral-500">

@@ -2,14 +2,41 @@ import { motion } from "framer-motion";
 import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 import { eventData } from "../data/eventData";
+import oyuImg from "../assets/oyu_circle.png";
+
 
 export default function Story() {
   return (
     <AnimatedSection>
-      <section className="section-padding">
+      <section className="relative section-padding overflow-hidden">
         <SectionTitle
           subtitle="Story"
           title="Мереке туралы"
+        />
+
+        {/* absolute image */}
+        <motion.img
+        src={oyuImg}
+        alt="decoration"
+        animate={{
+            rotate: 360,
+        }}
+        transition={{
+            duration: 60,
+            repeat: Infinity,
+            ease: "linear",
+        }}
+        className="
+            absolute
+            left-1/2
+            z-0
+            w-94
+            opacity-60
+            pointer-events-none
+            select-none
+            md:w-80
+            lg:w-96
+        "
         />
 
         <div className="space-y-6">

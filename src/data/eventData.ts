@@ -3,7 +3,7 @@ export const eventData = {
 
   bride: "Көркемай",
 
-  date: "15 Тамыз 2026",
+  date: "1 Тамыз 2026",
 
   time: "18:00",
 
@@ -13,7 +13,7 @@ export const eventData = {
     map: "https://maps.google.com",
   },
 
-  countdownDate: "2026-08-15T18:00:00",
+  countdownDate: "2026-08-01T18:00:00+05:00",
 
   welcome:
     "Сіздерді аяулы қызымыздың «Қыз ұзату» салтанатына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз.",
