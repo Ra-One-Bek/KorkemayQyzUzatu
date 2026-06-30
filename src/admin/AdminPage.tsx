@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
+
 import {
   FiDownload,
   FiUsers,
@@ -19,12 +21,13 @@ interface Guest {
 
 const STATUS_COMING = "Обязательно приду";
 const STATUS_MAYBE = "Возможно приду";
+const STATUS_NOT_COMING = "Не смогу прийти";
 
 const FILTERS = [
   { key: "all", label: "Барлығы" },
   { key: STATUS_COMING, label: "Келеді" },
   { key: STATUS_MAYBE, label: "Мүмкін" },
-  { key: "Бармаймын", label: "Келмейді" },
+  { key: STATUS_NOT_COMING, label: "Келмейді" },
 ] as const;
 
 export default function AdminPage() {
@@ -48,22 +51,130 @@ export default function AdminPage() {
     setLoading(false);
   }
 
-  function exportExcel() {
-    const rows = guests.map((guest) => ({
-      Имя: guest.name,
-      Телефон: guest.phone,
-      Статус: guest.status,
-      Дата: new Date(guest.created_at).toLocaleString(),
-    }));
+  async function exportExcel() {
+    const workbook = new ExcelJS.Workbook();
 
-    const worksheet = XLSX.utils.json_to_sheet(rows);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Guests");
-    XLSX.writeFile(workbook, "guests.xlsx");
+    const sheet = workbook.addWorksheet("Қонақтар");
+
+    sheet.columns = [
+      { header: "№", key: "id", width: 8 },
+      { header: "Қонақ", key: "name", width: 35 },
+      { header: "Телефон", key: "phone", width: 20 },
+      { header: "Статус", key: "status", width: 28 },
+      { header: "Тіркелген күні", key: "date", width: 24 },
+    ];
+
+    sheet.getRow(1).height = 28;
+
+    sheet.getRow(1).font = {
+      bold: true,
+      color: { argb: "FFFFFFFF" },
+      size: 13,
+    };
+
+    sheet.getRow(1).fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: {
+        argb: "D4AF37",
+      },
+    };
+
+    sheet.getRow(1).alignment = {
+      vertical: "middle",
+      horizontal: "center",
+    };
+
+    sheet.views = [
+      {
+        state: "frozen",
+        ySplit: 1,
+      },
+    ];
+
+    guests.forEach((guest, index) => {
+      const row = sheet.addRow({
+        id: index + 1,
+        name: guest.name,
+        phone: guest.phone,
+        status: guest.status,
+        date: new Date(guest.created_at).toLocaleString("ru-RU"),
+      });
+
+      row.height = 24;
+
+      row.alignment = {
+        vertical: "middle",
+      };
+
+      row.eachCell((cell) => {
+        cell.border = {
+          top: {
+            style: "thin",
+            color: { argb: "DDDDDD" },
+          },
+          left: {
+            style: "thin",
+            color: { argb: "DDDDDD" },
+          },
+          bottom: {
+            style: "thin",
+            color: { argb: "DDDDDD" },
+          },
+          right: {
+            style: "thin",
+            color: { argb: "DDDDDD" },
+          },
+        };
+      });
+
+      if (guest.status === STATUS_COMING) {
+        row.getCell("status").fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: {
+            argb: "DFF6DD",
+          },
+        };
+      }
+
+      if (guest.status === STATUS_MAYBE) {
+        row.getCell("status").fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: {
+            argb: "FFF4CC",
+          },
+        };
+      }
+
+      if (guest.status === STATUS_NOT_COMING) {
+        row.getCell("status").fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: {
+            argb: "FADBD8",
+          },
+        };
+      }
+    });
+
+    sheet.autoFilter = {
+      from: "A1",
+      to: "E1",
+    };
+
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    saveAs(
+      new Blob([buffer]),
+      "Қонақтар.xlsx"
+    );
   }
 
   const coming = guests.filter((g) => g.status === STATUS_COMING).length;
   const maybe = guests.filter((g) => g.status === STATUS_MAYBE).length;
+  const notComing = guests.filter((g) => g.status === STATUS_NOT_COMING).length;
 
   const filteredGuests = useMemo(() => {
     return guests.filter((guest) => {
@@ -114,8 +225,14 @@ export default function AdminPage() {
             label="Барлығы"
             value={guests.length}
           />
-          <StatCard label="Келеді" value={coming} valueClassName="text-green-600" />
-          <StatCard label="Мүмкін" value={maybe} valueClassName="text-amber-500" />
+          <StatCard icon={<FiUsers size={18} className="text-[#d4af37]" />} label="Келеді" value={coming} valueClassName="text-green-600" />
+          <StatCard icon={<FiUsers size={18} className="text-[#d4af37]" />} label="Мүмкін" value={maybe} valueClassName="text-amber-500" />
+          <StatCard
+            icon={<FiUsers size={18} className="text-[#d4af37]" />}
+            label="Келмейді"
+            value={notComing}
+            valueClassName="text-red-600"
+          />
         </div>
 
         {/* Поиск */}
