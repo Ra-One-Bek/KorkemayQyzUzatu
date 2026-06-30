@@ -1,6 +1,7 @@
 import {
   motion,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { useRef } from "react";
@@ -12,19 +13,21 @@ export default function Hero() {
   const ref = useRef(null);
 
     const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
+      target: ref,
+      offset: ["start start", "end start"],
+    });
+
+    const smoothProgress = useSpring(scrollYProgress, {
+      stiffness: 300,
+      damping: 40,
+      mass: 0.5,
     });
 
     // Параллакс
-    const y = useTransform(scrollYProgress, [0, 1], [0, 420]);
+    const y = useTransform(smoothProgress, [0, 1], [0, 420]);
 
     // Глубина
-    const scale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [1.15, 1]
-    );  
+    const scale = useTransform(smoothProgress, [0, 1], [1.15, 1]);
   return (
     <section
     ref={ref}
@@ -41,6 +44,8 @@ export default function Hero() {
         style={{
             y,
             scale,
+            willChange: "transform",
+            transform: "translateZ(0)",
         }}
         className="
             absolute

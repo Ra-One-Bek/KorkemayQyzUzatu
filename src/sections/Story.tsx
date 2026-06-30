@@ -29,7 +29,7 @@ export default function Story() {
         className="
             absolute
             left-1/2
-            z-0
+            -z-20
             w-94
             opacity-60
             pointer-events-none
