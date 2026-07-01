@@ -1,7 +1,3 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-
-import SplashScreen from "./components/SplashScreen";
 import Footer from "./components/Footer";
 import MusicPlayer from "./components/MusicPlayer";
 
