@@ -8,7 +8,7 @@ export default function CountdownSection() {
     <AnimatedSection>
       <section className="section-padding">
         <SectionTitle
-          subtitle="Countdown"
+          subtitle="Қалған уакыт"
           title="Мерекеге дейін"
         />
 

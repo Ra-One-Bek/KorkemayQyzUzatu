@@ -8,7 +8,7 @@ export default function Timeline() {
     <AnimatedSection>
       <section className="relative overflow-hidden section-padding">
         <SectionTitle
-          subtitle="Timeline"
+          subtitle="Мереке кестесі"
           title="Бағдарлама"
         />
 

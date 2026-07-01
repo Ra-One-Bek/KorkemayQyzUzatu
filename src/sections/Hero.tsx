@@ -3,61 +3,111 @@ import {
   useScroll,
   useSpring,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import { useRef } from "react";
 import { eventData } from "../data/eventData";
 import bgImage from "../assets/HeroKorkemay.webp";
 
-export default function Hero() {
+// Плавная, «дорогая» кривая для входа элементов
+// as const фиксирует тип как кортеж [number, number, number, number],
+// который требует framer-motion для cubic-bezier easing
+const EASE = [0.16, 1, 0.3, 1] as const;
 
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: EASE },
+  },
+};
+
+const fadeUpBlur: Variants = {
+  hidden: { opacity: 0, y: 48, filter: "blur(14px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1.3, ease: EASE },
+  },
+};
+
+export default function Hero() {
   const ref = useRef(null);
 
-    const { scrollYProgress } = useScroll({
-      target: ref,
-      offset: ["start start", "end start"],
-    });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-    const smoothProgress = useSpring(scrollYProgress, {
-      stiffness: 300,
-      damping: 40,
-      mass: 0.5,
-    });
+  // Более "тяжёлая" и кинематографичная пружина для параллакса
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 26,
+    mass: 0.8,
+  });
 
-    // Параллакс
-    const y = useTransform(smoothProgress, [0, 1], [0, 420]);
+  // Параллакс: фото двигается медленнее скролла — создаёт глубину
+  const y = useTransform(smoothProgress, [0, 1], [0, 180]);
+  // Лёгкое приближение в начале, плавно "отпускает" картинку
+  const scale = useTransform(smoothProgress, [0, 1], [1.18, 1.02]);
+  // Едва заметный поворот добавляет живости, не бросается в глаза
+  const rotate = useTransform(smoothProgress, [0, 1], [0.6, 0]);
+  // Затемнение усиливается при скролле — фото "уходит" под текст
+  const overlayOpacity = useTransform(smoothProgress, [0, 1], [0, 0.35]);
+  // Лёгкий blur на глубоких кадрах — имитация глубины резкости
+  const blur = useTransform(smoothProgress, [0, 1], [0, 3]);
+  const imgFilter = useTransform(blur, (b) => `blur(${b}px)`);
 
-    // Глубина
-    const scale = useTransform(smoothProgress, [0, 1], [1.15, 1]);
   return (
-    <section
-    ref={ref}
-    className="relative overflow-hidden bg-white"
-    >
+    <section ref={ref} className="relative overflow-hidden bg-white">
       {/* Верхнее фото */}
-      <div className="relative h-[75vh] w-full overflow-hidden">
+      <div className="relative h-[65vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/10" />
-
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-white/20" />
+
         <motion.img
-        src={bgImage}
-        alt=""
-        style={{
+          src={bgImage}
+          alt=""
+          initial={{ opacity: 0, scale: 1.25 }}
+          animate={{ opacity: 1, scale: 1.18 }}
+          transition={{ duration: 1.6, ease: EASE }}
+          style={{
             y,
             scale,
-            willChange: "transform",
+            rotate,
+            filter: imgFilter,
+            willChange: "transform, filter",
             transform: "translateZ(0)",
-        }}
-        className="
+          }}
+          className="
             absolute
             inset-0
             h-full
             w-full
             object-cover
             object-center
-        "
+          "
         />
 
-        {/* затемнение */}
+        {/* динамическое затемнение при скролле — усиливает эффект глубины */}
+        <motion.div
+          style={{ opacity: overlayOpacity }}
+          className="absolute inset-0 bg-black"
+        />
+
+        {/* затемнение (статичное, для читаемости низа) */}
         <div className="absolute inset-0 bg-gradient-to-t from-white/0 via-white/10 from-white/100" />
 
         {/* рваный низ — крупный, неравномерный, волокнистый разрыв */}
@@ -201,12 +251,14 @@ export default function Hero() {
       </div>
 
       {/* Нижний контент */}
-      <div className="relative z-10 px-6 pb-20 pt-2 text-center">
-
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 px-6 pb-20 pt-2 text-center"
+      >
         <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeUp}
           className="
             mx-auto flex items-center justify-center gap-3
             font-kz-1
@@ -215,29 +267,25 @@ export default function Hero() {
             text-amber-900
           "
         >
-          <span className="h-px w-8 bg-[#d4af37]/60" />
+          <motion.span
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.5, duration: 0.7, ease: EASE }}
+            className="h-px w-8 origin-right bg-[#d4af37]/60"
+          />
           {eventData.event}
-          <span className="h-px w-8 bg-[#d4af37]/60" />
+          <motion.span
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.5, duration: 0.7, ease: EASE }}
+            className="h-px w-8 origin-left bg-[#d4af37]/60"
+          />
         </motion.p>
 
         <motion.h1
-          initial={{
-            opacity: 0,
-            y: 40,
-            filter: "blur(10px)",
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-          }}
-          transition={{
-            delay: 0.2,
-            duration: 1.2,
-          }}
+          variants={fadeUpBlur}
           className="
             font-kz-1
-            mt-3
             text-7xl
             leading-[1.05]
             text-[#b8922e]
@@ -248,13 +296,31 @@ export default function Hero() {
           {eventData.bride}
         </motion.h1>
 
+        <motion.div variants={fadeUp} className="flex flex-col items-center">
+          <p className="font-kz-1 mt-5 text-4xl tracking-[6px] text-neutral-600">
+            {eventData.date}
+          </p>
+
+          <p className="font-cormorant text-xl font-semibold tracking-[2px] text-amber-900">
+            Үміт мейрамханасы
+          </p>
+
+          <div className="flex items-center">
+            <span className="h-px w-10 bg-[#d4af37]/60" />
+            <p className="font-cormorant text-2xl font-medium text-[#b8922e]">
+              {eventData.time}
+            </p>
+            <span className="h-px w-10 bg-[#d4af37]/60" />
+          </div>
+        </motion.div>
+
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.9, ease: EASE }}
           className="mx-auto my-4 h-px w-24 origin-center bg-[#d4af37]"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }

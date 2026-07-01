@@ -10,8 +10,8 @@ export default function Story() {
     <AnimatedSection>
       <section className="relative section-padding overflow-hidden">
         <SectionTitle
-          subtitle="Story"
-          title="Мереке туралы"
+          subtitle="Қыз ұзату"
+          title="Салтанат туралы"
         />
 
         {/* absolute image */}

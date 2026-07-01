@@ -52,7 +52,7 @@ export default function Wishes() {
   return (
     <AnimatedSection>
       <section className="section-padding relative overflow-hidden">
-        <SectionTitle subtitle="Wishes" title="Ізгі тілек" />
+        <SectionTitle subtitle="Тілек" title="Ізгі тілек" />
 
         <div className="relative mx-auto max-w-xl">
           {/* Бабочки — разлетаются в разные стороны */}

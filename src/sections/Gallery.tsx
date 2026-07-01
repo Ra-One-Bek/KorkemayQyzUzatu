@@ -34,7 +34,7 @@ export default function Gallery() {
   return (
     <AnimatedSection>
       <section className="relative section-padding overflow-hidden">
-        <SectionTitle subtitle="Gallery" title="Естелік сәттер" />
+        <SectionTitle subtitle="Естелік" title="Естелік сәттер" />
 
         <div className="relative -mx-6 sm:-mx-10">
           {/* Туманные края — картинки "проявляются" */}
