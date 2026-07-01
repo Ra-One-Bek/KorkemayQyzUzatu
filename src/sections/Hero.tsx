@@ -73,7 +73,7 @@ export default function Hero() {
   return (
     <section ref={ref} className="relative overflow-hidden bg-white">
       {/* Верхнее фото */}
-      <div className="relative h-[65vh] w-full overflow-hidden">
+      <div className="relative h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/10" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-white/20" />
 
@@ -295,24 +295,6 @@ export default function Hero() {
         >
           {eventData.bride}
         </motion.h1>
-
-        <motion.div variants={fadeUp} className="flex flex-col items-center">
-          <p className="font-kz-1 mt-5 text-4xl tracking-[6px] text-neutral-600">
-            {eventData.date}
-          </p>
-
-          <p className="font-cormorant italic text-xl font-semibold [transform:skewX(-12deg)] tracking-[2px] text-amber-900">
-            Үміт мейрамханасы
-          </p>
-
-          <div className="flex items-center">
-            <span className="h-px w-10 bg-[#d4af37]/60" />
-            <p className="font-cormorant text-2xl font-medium text-[#b8922e]">
-              {eventData.time}
-            </p>
-            <span className="h-px w-10 bg-[#d4af37]/60" />
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}

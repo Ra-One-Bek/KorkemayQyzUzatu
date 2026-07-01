@@ -5,7 +5,6 @@ import Hero from "./sections/Hero";
 import Welcome from "./sections/Welcome";
 import Story from "./sections/Story";
 import Timeline from "./sections/Timeline";
-import Venue from "./sections/Venue";
 import CountdownSection from "./sections/CountdownSection";
 import Gallery from "./sections/Gallery";
 import Wishes from "./sections/Wishes";
@@ -22,8 +21,6 @@ function App() {
         <Hero />
 
         <Welcome />
-
-        <Venue />
 
         <Story />
 

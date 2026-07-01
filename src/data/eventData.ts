@@ -3,7 +3,7 @@ export const eventData = {
 
   bride: "Көркемай",
 
-  date: "1 тамыз 2026",
+  date: "01.08.2026",
 
   time: "18:00",
 

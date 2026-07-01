@@ -162,11 +162,11 @@ export default function Venue() {
         <div className="relative z-10 mx-auto max-w-xl text-center">
           <SectionTitle
             subtitle="Той туралы толық ақпарат"
-            title="Тойдың өтетін орны"
+            title=""
           />
 
           {/* Дата */}
-          <p className="font-cormorant italic mt-8 text-3xl font-semibold text-[#1f1f1f]">
+          <p className="font-cormorant uppercase italic mt-8 text-3xl font-semibold text-[#1f1f1f]">
             {eventData.date}
           </p>
 
