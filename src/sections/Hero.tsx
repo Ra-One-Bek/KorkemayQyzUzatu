@@ -301,7 +301,7 @@ export default function Hero() {
             {eventData.date}
           </p>
 
-          <p className="font-cormorant text-xl font-semibold tracking-[2px] text-amber-900">
+          <p className="font-cormorant italic text-xl font-semibold [transform:skewX(-12deg)] tracking-[2px] text-amber-900">
             Үміт мейрамханасы
           </p>
 
